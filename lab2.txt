@@ -1,0 +1,31 @@
+for file in *.csv; do sed 's/^/'"$file"',/' "$file" > out."$file"; done								#Agregar columna con el nombre de cada archivo
+
+for file in out.*.csv; do sed 's#\t#,#' "$file" > out1."$file"; done								#Eliminar el tabulador después de la letra
+
+for file in out1.out.data*.csv; do nl -w1 -s "," "$file" > out2."$file"; done							#Agrega el número de la fila en todos los archivos
+
+for file in out2.out1.out.data*.csv; do sed 's/\([0-9]\),data\([0-9]\).csv,/data\2.csv,\1,/' "$file" > out3."$file"; done	#Para trocar el nombre del archivocon el nombre de la fila
+
+for line in prueba.csv; do sed 's/\([0-9]\)-\([a-zA-Z]\)-/' prueba.csv > \1-\2.csv; done
+
+
+var=0
+sed -n ''"$((++var))"'p' prueba.csv
+
+for line in $(cat prueba.csv); do sed -n ''"$line"'p' prueba.csv > 1."$line"; done
+
+for line in $(cat prueba.csv); do echo "$line" > 1."$line"; done
+while read line; do echo -e "$line\n"; done < file.txt
+
+
+for file in *.csv; do sed 's#,#\r#' "$file" > out."$file"; done									#Para generar el salto de línea en las comas
+
+for file in *.csv; do sed 's#,##' "$file" > out."$file"; done
+
+
+
+
+
+var=2
+
+for x in wc -l out1.out.data1.csv; do sed 's/data1.csv,/data1.csv,'"$((++var))"',/' out1.out.data1.csv; done > ojala.2
